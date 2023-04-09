@@ -1,6 +1,15 @@
-FROM ubuntu
+FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y build-essential debhelper dh-make devscripts gnupg2 gnupg-agent
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends \
+		build-essential \
+		debhelper \
+		dh-make \
+		devscripts \
+		gnupg2 \
+		gnupg-agent \
+	&& dpkg --add-architecture amd64 \
+	&& dpkg --add-architecture arm64
 RUN mkdir /build
 WORKDIR /build
 
